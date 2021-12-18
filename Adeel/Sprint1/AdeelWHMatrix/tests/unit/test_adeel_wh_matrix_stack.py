@@ -1,13 +1,13 @@
 import aws_cdk as core
 import aws_cdk.assertions as assertions
 
-from my_demo_repo.my_demo_repo_stack import MyDemoRepoStack
+from adeel_wh_matrix.adeel_wh_matrix_stack import AdeelWhMatrixStack
 
 # example tests. To run these tests, uncomment this file along with the example
-# resource in my_demo_repo/my_demo_repo_stack.py
+# resource in adeel_wh_matrix/adeel_wh_matrix_stack.py
 def test_sqs_queue_created():
     app = core.App()
-    stack = MyDemoRepoStack(app, "my-demo-repo")
+    stack = AdeelWhMatrixStack(app, "adeel-wh-matrix")
     template = assertions.Template.from_stack(stack)
 
 #     template.has_resource_properties("AWS::SQS::Queue", {
