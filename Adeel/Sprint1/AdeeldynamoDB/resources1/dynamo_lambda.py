@@ -4,13 +4,10 @@ import os
 def lambda_handler(events, context):
     DB = boto3.resource('dynamodb')
     message = events['Records'][0]['Sns']['Message']
-    reason = events['Records'][0]['Sns']['Reason for State Change']
-    time = events['Records'][0]['Sns']['Timestamp']
-
-    table_name = DB.Table('AdeeldynamoDbStack-TableCD117FA1-7FX8MT52I020')
+    table_name = DB.Table('AdeeldynamoDbStack-TableCD117FA1-1GHRSKAE7YTXG')
     values = {}
-    values['id'] = message
-    values['Reason']= reason
-    values['time']=time
+    values['id'] = message['AlarmName']
+    values['Reason']= message['NewStateReason']
+    values['Time']=message['StateCangeTime']
     table_name.put_item(
-    Item = values)
+    Item=values)

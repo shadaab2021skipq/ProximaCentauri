@@ -31,7 +31,7 @@ class AdeeldynamoDbStack(cdk.Stack):
         
         
         #dynamo_table = self.create_table()
-        dynamo_table = db.Table.from_table_arn(self,'ImportedTable','arn:aws:dynamodb:us-east-2:315997497220:table/AdeeldynamoDbStack-TableCD117FA1-7FX8MT52I020')
+        dynamo_table = db.Table.from_table_arn(self,'ImportedTable','arn:aws:dynamodb:us-east-2:315997497220:table/AdeeldynamoDbStack-TableCD117FA1-1GHRSKAE7YTXG')
         dynamo_table.grant_read_write_data(lambda_role)
         
         
