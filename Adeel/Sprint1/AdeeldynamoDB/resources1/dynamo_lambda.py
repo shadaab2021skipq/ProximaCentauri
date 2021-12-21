@@ -1,13 +1,23 @@
 import boto3
-import os
+import json
 
-def lambda_handler(events, context):
-    DB = boto3.resource('dynamodb')
-    message = events['Records'][0]['Sns']['Message']
-    table_name = DB.Table('AdeeldynamoDbStack-TableCD117FA1-1GHRSKAE7YTXG')
-    values = {}
-    values['id'] = message['AlarmName']
-    values['Reason']= message['NewStateReason']
-    values['Time']=message['StateCangeTime']
-    table_name.put_item(
-    Item=values)
+client = boto3.client('dynamodb')
+  
+  
+   ############################## Creating object for table  ###############################
+  
+def lambda_handler(event, context):
+   # db = boto3.resource('dynamodb')
+    client = boto3.client('dynamodb')
+    message = event['Records'][0]['Sns']
+    msg = json.loads(message['Message'])
+    #table_name = db.Table('AdeelAlarm')
+
+     ############################## Putting values in dynamo table###############################
+    
+    client.put_item(
+    TableName = 'AdeelAlarmdynamo',
+    Item={
+        'Timestamp':{'S' : message['Timestamp']},
+        'Reason':{'S':msg['NewStateReason']}
+    })
