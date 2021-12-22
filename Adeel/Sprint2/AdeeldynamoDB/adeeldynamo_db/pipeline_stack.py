@@ -1,20 +1,36 @@
 ##########################Importing All the nessearry libraries#######################################
-from aws_cdk import (
-    core as cdk,
-    aws_lambda as lambda_,
-    aws_events as event_,
-    aws_events_targets as targets_,
-    aws_iam,
-    aws_cloudwatch as cloudwatch_,
-    aws_sns as sns,
-    aws_sns_subscriptions as subscriptions_,
-    aws_cloudwatch_actions as actions_,
-    aws_dynamodb as db
-)
-from constructs import Construct
-  
-class AdeeldynamoDbStack(cdk.Stack):
+from aws_cdk import core
+from aws_cdk import aws_codepipeline_actions as cpactions
+from aws_cdk import pipelines
+from adeeldynamo_db.dynamo_stage import DynamoStage
+from adeeldynamo_db.adeeldynamo_db_stack import AdeeldynamoDbStack
 
-    def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
-        super().__init__(scope, construct_id, **kwargs)
-      
+class PipelineStack(core.Stack):
+
+    def __init__(self, scope: core.Construct, id: str, **kwargs) -> None:
+        super().__init__(scope, id, **kwargs)
+        
+        ############################## Pipelines Source ###############################
+    
+        source = pipelines.CodePipelineSource.git_hub(repo_string='ProximaCentauri/adeel2021skipq' ,
+        branch = 'main',authentication=core.SecretValue.secrets_manager('Adeel/github/token'),
+        trigger = cpactions.GitHubTrigger.POLL
+        )
+        
+        ############################## Pipelines built ###############################
+        
+        
+        synth = pipelines.ShellStep('synth',input = source,
+        commands=["cd cd Adeel/Sprint2/AdeeldynamoDB","pip install -r requirments.txt" , "npm install -g aws-cdk","cdk synth"],
+        primary_output_directory = "Adeel/Sprint2/AdeeldynamoDB?cdk.out")
+        
+        ############################## Pipelines update ###############################
+        
+        pipeline = pipelines.CodePipeline(self,'pipeline',synth = synth)
+    
+        beta = DynamoStage(self, "Beta" , env= {
+            'account':'315997497220',
+            'region': 'us-east-2'
+        })
+        pipeline.add_stage(beta)
+    

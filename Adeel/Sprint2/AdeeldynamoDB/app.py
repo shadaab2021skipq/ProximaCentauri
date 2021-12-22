@@ -7,11 +7,11 @@ from aws_cdk import core as cdk
 # with examples from the CDK Developer's Guide, which are in the process of
 # being updated to use `cdk`.  You may delete this import if you don't need it.
 from aws_cdk import core
-from adeeldynamo_db.adeeldynamo_db_stack import AdeeldynamoDbStack
+from adeeldynamo_db.pipeline_stack import PipelineStack
 
 
 app = cdk.App()
-AdeeldynamoDbStack(app, "AdeeldynamoDbStack",
+#AdeeldynamoDbStack(app, "AdeeldynamoDbStack",
     # If you don't specify 'env', this stack will be environment-agnostic.
     # Account/Region-dependent features and context lookups will not work,
     # but a single synthesized template can be deployed anywhere.
@@ -27,6 +27,7 @@ AdeeldynamoDbStack(app, "AdeeldynamoDbStack",
     #env=cdk.Environment(account='123456789012', region='us-east-1'),
 
     # For more information, see https://docs.aws.amazon.com/cdk/latest/guide/environments.html
-    )
+ #   )
+PipelineStack(app,'AdeelPipelineStack',env = core.Environment(account='315997497220',region= 'us-east-1'))
 
 app.synth()

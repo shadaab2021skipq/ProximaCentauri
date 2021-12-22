@@ -11,10 +11,12 @@ from aws_cdk import (
     aws_cloudwatch_actions as actions_,
     aws_dynamodb as db
 )
-from constructs import Construct
+from adeeldynamo_db.adeeldynamo_db_stack import AdeeldynamoDbStack
   
-class AdeeldynamoDbStack(cdk.Stack):
+class DynamoStage(cdk.Stage):
 
-    def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
-        super().__init__(scope, construct_id, **kwargs)
+    def __init__(self, scope: cdk.Construct, id: str, **kwargs) -> None:
+        super().__init__(scope, id, **kwargs)
       
+        adeeldynamo_db_stack = AdeeldynamoDbStack(self , 'adeelStack')
+        
