@@ -12,8 +12,8 @@ class PipelineStack(core.Stack):
         
         ############################## Pipelines Source ###############################
     
-        source = pipelines.CodePipelineSource.git_hub(repo_string='ProximaCentauri/adeel2021skipq' ,
-        branch = 'main',authentication=core.SecretValue.secrets_manager('Adeel/github/token'),
+        source = pipelines.CodePipelineSource.git_hub(repo_string='adeel2021skipq/ProximaCentauri' ,
+        branch = 'main',authentication=core.SecretValue.secrets_manager('Adeel/github/token1'),
         trigger = cpactions.GitHubTrigger.POLL
         )
         
