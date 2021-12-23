@@ -1,6 +1,6 @@
 # Web Health Monitoring Application using CDK
 ## Overview
-In this project we are going to build WebHealth Monitoring Application usin `AWS CDK` and multiple AWS services like `Lambda`, `S3`, `CloudWatch`, `DynamoDb`, `SNS`/`SQS`. With this application we will be able to get multiple web health metrics like Availability and Latency. It help you to monitor these metrices with respect to time and will generate an Alarm when metrics values breach the pre-defined thrusholds. This help will also send notification to subscribers about the alarm via an email and Store alarm logs in DynamoDb table for future references.
+In this project we are going to build WebHealth Monitoring Application using `AWS CDK` and multiple AWS services like `Lambda`, `S3`, `CloudWatch`, `DynamoDb`, `SNS`/`SQS`. With this application we will be able to get multiple web health metrics like Availability and Latency. It help you to monitor these metrices with respect to time and will generate an Alarm when metrics values breach the pre-defined thrusholds. This help will also send notification to subscribers about the alarm via an email and Store alarm logs in DynamoDb table for future references.
 
 ## Getting Started
 The `cdk.json` file tells the CDK Toolkit how to execute your app.
