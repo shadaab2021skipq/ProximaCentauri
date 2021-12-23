@@ -3,7 +3,6 @@ from aws_cdk import core
 from aws_cdk import aws_codepipeline_actions as cpactions
 from aws_cdk import pipelines
 from adeeldynamo_db.dynamo_stage import DynamoStage
-from adeeldynamo_db.adeeldynamo_db_stack import AdeeldynamoDbStack
 
 class PipelineStack(core.Stack):
 
