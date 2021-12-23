@@ -25,11 +25,11 @@ class PipelineStack(core.Stack):
         
         ############################## Pipelines update ###############################
         
-        pipeline = pipelines.CodePipeline(self,'pipeline',synth = synth)
+       # pipeline = pipelines.CodePipeline(self,'pipeline',synth = synth)
     
-        beta = DynamoStage(self, "Beta" , env= {
-            'account':'315997497220',
-            'region': 'us-east-2'
-        })
-        pipeline.add_stage(beta)
+        #beta = DynamoStage(self, "Beta" , env= {
+        #    'account':'315997497220',
+         #   'region': 'us-east-2'
+    #    })
+     #   pipeline.add_stage(beta)
     
