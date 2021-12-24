@@ -39,7 +39,7 @@ class PipelineStack(core.Stack):
         
         unit_test = pipelines.ShellStep('unit_test',
         commands=["cd Adeel/Sprint2/AdeeldynamoDB","pip install -r requirements.txt" ,
-        "pytest unittests","pytest inegtests"])
+        "pytest unittests","pytest integtests"])
         
         pipeline.add_stage(beta, pre = [unit_test])
     
