@@ -32,10 +32,10 @@ class PipelineStack(core.Stack):
             'region': 'us-east-2'
         })
         
-       # prod = DynamoStage(self, "Prod" , env= {
-        #    'account':'315997497220',
-         #   'region': 'us-east-2'
-        #})
+        prod = DynamoStage(self, "Prod" , env= {
+            'account':'315997497220',
+            'region': 'us-east-2'
+        })
         
         unit_test = pipelines.ShellStep('unit_test',
         commands=["cd Adeel/Sprint2/AdeeldynamoDB","pip install -r requirements.txt" ,
@@ -43,5 +43,5 @@ class PipelineStack(core.Stack):
         
         pipeline.add_stage(beta, pre = [unit_test])
     
-        #pipeline.add_stage(prod ,
-        #pre = [pipelines.ManualApprovalStep("PromoteToProd")])
+        pipeline.add_stage(prod ,
+        pre = [pipelines.ManualApprovalStep("PromoteToProd")])
