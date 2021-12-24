@@ -34,20 +34,20 @@ class AdeeldynamoDbStack(cdk.Stack):
         our_rule = event_.Rule(self, id = "MonitorWebHealthMAtrix",enabled = True, schedule= lambda_schedule,targets = [lambda_target] )
         
          ############################## Creating Dynamo table and giving it Premission ###############################
-        try:
-            dynamo_table=self.create_table(id='BDtable',name = "AdeelAlarmdynamoBeta",
-            key=db.Attribute(name="Timestamp", type=db.AttributeType.STRING))
-        except:
-            pass
-        db_lambda_role = self.create_db_lambda_role()
-        db_lamda = self.create_lambda('secondHellammbda',"./resources1/",'dynamo_lambda.lambda_handler',db_lambda_role)
-        dynamo_table.grant_full_access(db_lamda)
+        #try:
+         #   dynamo_table=self.create_table(id='BDtable',name = "AdeelAlarmdynamoBeta",
+        #    key=db.Attribute(name="Timestamp", type=db.AttributeType.STRING))
+        #except:
+         #   pass
+        #db_lambda_role = self.create_db_lambda_role()
+        #db_lamda = self.create_lambda('secondHellammbda',"./resources1/",'dynamo_lambda.lambda_handler',db_lambda_role)
+        #dynamo_table.grant_full_access(db_lamda)
         
          ############################## Subscriptions ###############################
         
         topic = sns.Topic(self,'WHtopic')
         topic.add_subscription(subscriptions_.EmailSubscription('adeel.shahzad.s@skipq.org'))
-        topic.add_subscription(subscriptions_.LambdaSubscription(fn=db_lamda)) 
+        #topic.add_subscription(subscriptions_.LambdaSubscription(fn=db_lamda)) 
         
          ############################## Alarms on cloud watch ###############################
         
