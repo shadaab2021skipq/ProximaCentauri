@@ -16,7 +16,7 @@ def lambda_handler(event, context):
      ############################## Putting values in dynamo table###############################
     
     client.put_item(
-    TableName = 'AdeelAlarmdynamo',
+    TableName = 'AdeelAlarmdynamoBeta',
     Item={
         'Timestamp':{'S' : message['Timestamp']},
         'Reason':{'S':msg['NewStateReason']}

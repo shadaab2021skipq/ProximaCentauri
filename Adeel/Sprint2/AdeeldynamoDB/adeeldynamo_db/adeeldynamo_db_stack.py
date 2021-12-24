@@ -35,7 +35,7 @@ class AdeeldynamoDbStack(cdk.Stack):
         
          ############################## Creating Dynamo table and giving it Premission ###############################
         try:
-            dynamo_table=self.create_table(id='BDtable',name = "AdeelAlarmdynamo",
+            dynamo_table=self.create_table(id='BDtable',name = "AdeelAlarmdynamoBeta",
             key=db.Attribute(name="Timestamp", type=db.AttributeType.STRING))
         except:
             pass
