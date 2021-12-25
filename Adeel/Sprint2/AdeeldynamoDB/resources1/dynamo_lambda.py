@@ -12,10 +12,11 @@ def lambda_handler(event, context):
     client = boto3.client('dynamodb')
     message = event['Records'][0]['Sns']
     msg = json.loads(message['Message'])
+    
     if msg['AlarmName'][0] == 'P':
         table_name = tables[1]
     elif msg['AlarmName'][0] == 'B':
-        table_name = table[0]
+        table_name = tables[0]
         
     #table_name = db.Table('AdeelAlarm')
     #record = event['Records'][0]['dynamodb']
@@ -30,6 +31,6 @@ def lambda_handler(event, context):
     TableName = table_name,
     Item={
         'Timestamp':{'S' : message['Timestamp']},
-        'Reason':{'S':msg['NewStateReason']}
-        'URL':{'S':data['Trigger']['Dimensions'][0]['value']}
+        'Reason':{'S':msg['NewStateReason']},
+        'URL':{'S':msg['Trigger']['Dimensions'][0]['value']}
     })
