@@ -19,5 +19,6 @@ def lambda_handler(event, context):
     TableName = 'AdeelAlarmdynamo',
     Item={
         'Timestamp':{'S' : message['Timestamp']},
-        'Reason':{'S':msg['NewStateReason']}
+        'Reason':{'S':msg['NewStateReason']},
+        'URL':{'S':data['Trigger']['Dimensions'][0]['value']}
     })

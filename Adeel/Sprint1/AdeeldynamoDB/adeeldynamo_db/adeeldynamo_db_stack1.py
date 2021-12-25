@@ -35,9 +35,9 @@ class AdeeldynamoDbStack(cdk.Stack):
         
          ############################## Creating Dynamo table and giving it Premission ###############################
         
-        dynamo_table=self.create_table(id='BDtable',name = "AdeelAlarmdynamo", key=db.Attribute(name="Timestamp", type=db.AttributeType.STRING))
+        dynamo_table=self.create_table(id='BDtable', key=db.Attribute(name="Timestamp", type=db.AttributeType.STRING))
         db_lambda_role = self.create_db_lambda_role()
-        db_lamda = self.create_lambda('secondHellammbda',"./resources1/",'dynamo_lambda.lambda_handler',db_lambda_role)
+        db_lamda = self.create_lambda('secondHellammbda',"./resources1/",'d_lambda.lambda_handler',db_lambda_role)
         dynamo_table.grant_full_access(db_lamda)
         
          ############################## Subscriptions ###############################
@@ -120,7 +120,6 @@ class AdeeldynamoDbStack(cdk.Stack):
         role=role,
         timeout= cdk.Duration.minutes(5)
     )
-    def create_table(self,id,name,key):
+    def create_table(self,id,key):
         return db.Table(self,id,
-        table_name = name,
         partition_key=key)

@@ -7,7 +7,7 @@ from aws_cdk import core as cdk
 # with examples from the CDK Developer's Guide, which are in the process of
 # being updated to use `cdk`.  You may delete this import if you don't need it.
 from aws_cdk import core
-from adeeldynamo_db.adeeldynamo_db_stack import AdeeldynamoDbStack
+from adeeldynamo_db1.adeeldynamo_db_stack import AdeeldynamoDbStack
 
 
 app = cdk.App()
