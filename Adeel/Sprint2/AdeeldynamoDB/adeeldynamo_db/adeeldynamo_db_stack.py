@@ -9,7 +9,8 @@ from aws_cdk import (
     aws_sns as sns,
     aws_sns_subscriptions as subscriptions_,
     aws_cloudwatch_actions as actions_,
-    aws_dynamodb as db
+    aws_dynamodb as db,
+    aws_codedeploy as codedeploy
 )
 from constructs import Construct
 from resources1 import constants1 as constants
@@ -84,7 +85,21 @@ class AdeeldynamoDbStack(cdk.Stack):
             latency_alarm.add_alarm_action(actions_.SnsAction(topic))
             b+=1
         
-         ##############################  role for Cloud watch ###############################
+         ##############################  Failure matrix creation ###############################
+         
+        duration_metric= cloudwatch_.Metric(namespace='AWS/Lambda', metric_name='Duration',
+        dimensions_map={'FunctionName': WH_lamda.function_name} ) 
+        
+        alarm_fail=cloudwatch_.Alarm(self, 'AlarmFail', metric=duration_metric, 
+        threshold=350, comparison_operator= cloudwatch_.ComparisonOperator.GREATER_THAN_THRESHOLD, 
+        evaluation_periods=1)
+        ##Defining alias for my dblambda 
+        WH_alias=lambda_.Alias(self, "AlaisForLambda", alias_name="WebHeathAlias",
+        version=WH_lamda.current_version) 
+        #### Defining code deployment group
+        codedeploy.LambdaDeploymentGroup(self, "id",alias=WH_alias, alarms=[alarm_fail])
+        
+        ##############################  role for Cloud watch ###############################
         
     def create_lambda_role(self):
         lambdaRole = aws_iam.Role(self,"lambda-role",
