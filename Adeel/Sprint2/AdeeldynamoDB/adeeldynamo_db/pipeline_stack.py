@@ -34,7 +34,7 @@ class PipelineStack(core.Stack):
         
         prod = DynamoStage(self, "Prod" , env= {
             'account':'315997497220',
-            'region': 'us-east-2'
+            'region': 'us-east-1'
         })
         
         unit_test = pipelines.ShellStep('unit_test',
