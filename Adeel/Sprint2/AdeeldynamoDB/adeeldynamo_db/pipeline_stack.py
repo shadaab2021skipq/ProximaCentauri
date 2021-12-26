@@ -26,20 +26,28 @@ class PipelineStack(core.Stack):
         ############################## Pipelines update ###############################
         
         pipeline = pipelines.CodePipeline(self,'pipeline',synth = synth)
+        
+         ############################## beta update ###############################
     
         beta = DynamoStage(self, "Beta" , env= {
             'account':'315997497220',
             'region': 'us-east-2'
         })
         
+         ############################## prod stage ###############################
+        
         prod = DynamoStage(self, "Prod" , env= {
             'account':'315997497220',
             'region': 'us-east-2'
         })
         
+         ############################## unit test ###############################
+        
         unit_test = pipelines.ShellStep('unit_test',
         commands=["cd Adeel/Sprint2/AdeeldynamoDB","pip install -r requirements.txt" ,
         "pytest unittests","pytest integtests"])
+        
+         ############################## adding stages ###############################
         
         pipeline.add_stage(beta, pre = [unit_test])
     
