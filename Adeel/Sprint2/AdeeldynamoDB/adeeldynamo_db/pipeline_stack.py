@@ -34,7 +34,7 @@ class PipelineStack(core.Stack):
             'region': 'us-east-2'
         })
         
-         ############################## prod stage ###############################
+         ############################# prod stage ###############################
         
         prod = DynamoStage(self, "Prod" , env= {
             'account':'315997497220',
