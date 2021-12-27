@@ -2,7 +2,7 @@ First check if your python version is up to date using
 
 >>python --version
 
-If not command
+If not command s
 
 >>vim /bin/bashrc
 
