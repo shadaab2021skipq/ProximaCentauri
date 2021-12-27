@@ -96,11 +96,12 @@ class AdeeldynamoDbStack(cdk.Stack):
         ##Defining alias for my dblambda 
         try:
             WH_alias=lambda_.Alias(self, "AlaisForLambda", alias_name="WebHeathAlias",
-            version=WH_lamda.current_version) 
+            version=WH_lamda.current_version)
+            #### Defining code deployment group
+            codedeploy.LambdaDeploymentGroup(self, "id",alias=WH_alias, alarms=[alarm_fail])
         except:
             pass
-        #### Defining code deployment group
-        codedeploy.LambdaDeploymentGroup(self, "id",alias=WH_alias, alarms=[alarm_fail])
+        
         
         ##############################  role for Cloud watch ###############################
         
